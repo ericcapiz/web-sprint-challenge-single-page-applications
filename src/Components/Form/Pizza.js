@@ -55,8 +55,8 @@ const NavCont = styled.div `
     margin: 20px 0;
 
 `;
-//added props
-const Form = (props)=>{
+
+const Form = ()=>{
   
 //set initial form state
 const [formState, setFormState] = useState({
@@ -64,9 +64,10 @@ const [formState, setFormState] = useState({
   phone: "",
   instructions: "",
   size: "",
-  pep:"",
-  saus:"",
-  cheese:"",
+  pep:false,
+  saus:false,
+  cheese:false,
+  pine: false,
 });
 
 //button disabled state
@@ -76,11 +77,6 @@ const [buttonDisabled, setButtonDisabled] = useState(true);
 const [errors, setErrors] = useState({
   name: "",
   phone: "",
-  instructions: "",
-  size:"",
-  pep:"",
-  saus:"",
-  cheese:"",
 });
 
 
@@ -91,7 +87,7 @@ const validateChange = (e) => {
 
   yup
     .reach(formSchema, e.target.name)
-    .validate(e.target.name === "terms" ? e.target.checked : e.target.value)
+    .validate(e.target.name  ? e.target.value : null)
     .then((valid) => {
 
       setErrors({
@@ -127,6 +123,7 @@ const formSubmit = (e) => {
         pep:"",
         saus:"",
         cheese:"",
+        pine:""
         
       });
     })
@@ -155,9 +152,10 @@ const formSchema = yup.object().shape({
   instructions: yup.string(),
   phone: yup.string().matches(phoneRegex, "Invalid phone number").required("Phone is required"),
   size: yup.string().oneOf(['Small', 'Medium', 'Large', 'XL']),
-  pep: yup.string('pepperoni'),
-  saus: yup.string('sausage'),
-  cheese: yup.string('cheese'),
+  pep: yup.boolean(),
+  saus: yup.boolean(),
+  cheese: yup.boolean(),
+  pine: yup.boolean(),
     
 
 
@@ -220,6 +218,7 @@ useEffect(() => {
 
     <label htmlFor="toppings">Choose Toppings:
     <input
+          data-cy="toppings"
           id="pep"
           type="checkbox"
           name="pep"
@@ -240,6 +239,13 @@ useEffect(() => {
           value={formState.cheese}
           onChange={inputChange}
         />Extra Cheese
+        <input
+          id="pine"
+          type="checkbox"
+          name="pine" 
+          value={formState.pine}
+          onChange={inputChange}
+        />Pineapple
 
     </label>
 
