@@ -87,7 +87,7 @@ const validateChange = (e) => {
 
   yup
     .reach(formSchema, e.target.name)
-    .validate(e.target.name  ? e.target.value : null)
+    .validate( e.target.value)
     .then((valid) => {
 
       setErrors({
@@ -184,7 +184,7 @@ useEffect(() => {
           type="text"
           name="name"
           data-cy="name"
-          placeholder="Name" 
+          placeholder="Name"
           value={formState.name}
           onChange={inputChange}
         />
@@ -218,32 +218,39 @@ useEffect(() => {
 
     <label htmlFor="toppings">Choose Toppings:
     <input
-          data-cy="toppings"
+          data-cy="pep"
           id="pep"
           type="checkbox"
           name="pep"
           value={formState.pep}
+          checked={formState.pep}
           onChange={inputChange}
         />Pepperoni
         <input
+          data-cy="saus"
           id="saus"
           type="checkbox"
-          name="saus" 
-          value={formState.saus}
+          name="saus"
+          value={formState.saus} 
+          checked={formState.saus}
           onChange={inputChange}
         />Sausage
          <input
+         data-cy="cheese"
           id="cheese"
           type="checkbox"
           name="cheese" 
           value={formState.cheese}
+          checked={formState.cheese}
           onChange={inputChange}
         />Extra Cheese
         <input
+          data-cy="pine"
           id="pine"
           type="checkbox"
           name="pine" 
           value={formState.pine}
+          checked={formState.pine}
           onChange={inputChange}
         />Pineapple
 

@@ -6,8 +6,8 @@ const Nav =()=>{
     return(
           
         <div>
-            <Link to={`/`}><button>Home</button></Link>
-            <Link to={`/pizza`}><button>Order Pizza</button></Link>
+            <Link to={`/`}><button data-cy='home'>Home</button></Link>
+            <Link to={`/pizza`}><button data-cy='pizza'>Order Pizza</button></Link>
         </div>
     )
 }
